@@ -1,0 +1,97 @@
+## HTML + CSS
+### 요소 선택
+짝수 요소 선택
+:nth-of-type(2n) {}
+:nth-of-type(even) {}
+홀수 요소 선택
+:nth-of-type(2n-1) {}
+:nth-of-type(odd) {}
+3의 배수 요소 선택
+:nth-of-type(3n) {}
+### 기존 박스 크기를 유지하면서 안쪽 여백 지정하기
+요소에 padding으로 안쪽 여백을 지정하고 box-sizing: border-box 속성을 추가한다.
+### 자식 요소에 float 속성이 적용되더라도 부모 요소가 자식 요소의 높잇값을 인식 할 수 있도록
+```
+::after {
+	content: '';
+    display: block;
+    clear: both;
+}
+```
+### 자식 요소의 좌푯값 기준 설정
+position: relative;
+### 2D 변형 속성
+```
+요소를 1.3배 확대
+transform: scale(1.3);
+
+요소를 20도만큼 비틈
+transform: skewX(20deg);
+
+요소를 50px만큼 아래쪽으로 이동
+transform: translateY(50px);
+
+요소를 45도만큼 회전
+transform: rotate(45deg);
+```
+### 3D 변형 속성
+```
+★ 원근감 지정
+perspective 속성값이 작을수록 3D 요소의 왜곡이 심하게 나타나고,
+값이 클수록 완만해진다.
+perspective: 400px;
+
+x축으로 45도 회전
+transform: rotateX(45deg);
+
+y축으로 45도 회전
+transform: rotateY(45deg);
+
+z축으로 100px만큼 이동
+transform: translateZ(100px);
+
+z축으로 -100px만큼 이동
+transform: translateZ(-100px);
+```
+## JS
+### 요소를 모두 선택하기
+```js
+const items = document.querySelectAll('#wrap article");
+                                      
+for(let i=0; i<items.length; i++){
+  console.log(items[i]);
+}
+```
+.document.querySelectorAll()문으로 요소를 여러개 탐색하면 NodeList라는 특별한 묶음의 결괏값이 나온다. 이 NodeList는 반복문을 이용해서 요소를 하나씩 선택해야 한다. 
+`for(let item of items){console.log(item)}` for of문을 활용하면 여러 개의 요소를 편하게 반복하며 코드를 실행할 수 있지만, 반복되는 요소의 순섯값을 코드 내부에서 활용하기 위해서는 for문을 활용하는 것이 더 효과적이다.
+### 자식 요소 선택하기
+```js
+const list = document.querySelector(".list");
+const items = list.children;
+
+console.log(items); 
+// [li.item1, li.item2, li.item3, li.item4]
+console.log(items[0]);
+console.log(items[1]);
+console.log(items[2]);
+console.log(items[3]);
+```
+### 부모 요소 선택하기
+item.parentElement
+### 형제 요소 선택하기
+item.previousElementSibling
+item.nextElementSibling
+### HTML 요소에 이벤트 연결하기
+.addEventListener
+e.preventDefault() 세투세투 
+### 반복되는 요소에 이벤트 한꺼번에 연결하기
+```js
+const list = document.querySelectorAll(".list li");
+
+for(let el of list) {
+  el.addEventListener("click", e=>{
+    e.preventDefault();
+    console.log(e.currentTarget.innerText);
+  })
+}
+```
